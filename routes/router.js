@@ -24,10 +24,38 @@ router.get('/create', (req, res) =>{
     res.render('create')
 })
 
+router.get('/edit/:id', (req, res) => {
+    const id = req.params.id;
+    conexion.query('SELECT * FROM users WHERE id= ?', [id], (error, results) => {
+        if(error){
+            throw error;
+        } else {            
+            res.render('edit', {user: results[0] }) 
+        }
+    })
+})
+
+
+
+
 //invocamos al metodo pata el CRUD  de usuarios, llamamo al metodo save
 const userController = require('../controllers/userController')
-router.post('/save', userController.save)
 
+router.post('/save', userController.save)
+router.post('/update', userController.update)
+
+//el delete lo hacemos directamente aqui
+router.get('/delete/:id', (req, res) => {
+    const id = req.params.id
+    conexion.query('DELETE FROM users WHERE id= ?', [id], (error, results) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send("Error interno del servidor.");
+        } else {
+            res.redirect('/');
+        }
+    })
+});
 
 //tenemos que exportar hacia el app
 module.exports = router

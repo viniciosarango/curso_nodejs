@@ -49,9 +49,8 @@
                         <td> <%= user.email %> </td>
                         <td> <%= user.rol %> </td>                
                         <td>
-                            <a href="/edit" class="btn btn-info">Edit</a>
-                            <a href="/delete" class="btn btn-danger">Delete</a>
-                            
+                            <a href="/edit/<%= user.id %>" class="btn btn-info">Edit</a>
+                            <a href="/delete/<%= user.id %>" class="btn btn-danger">Delete</a>                            
                         </td>
                     </tr>
                     
