@@ -4,13 +4,12 @@
   
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <%- include ('template/breadcrumb', {module: 'Users'}) %>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-md-12">
-            <h1>CRUD USER</h1>
-            
+          <div class="col-md-12">                        
             <div class="container">
               <a href="/createUser" class="btn btn-primary mb-4"><i class="fa-regular fa-square-plus"></i></a>
             <table id="example1" class="table table-bordered table-striped text-center">

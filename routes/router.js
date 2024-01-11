@@ -5,11 +5,9 @@ const router = express.Router()
 
 const conexion = require ('../database/db')
 
-
 //creacion de ruta inicial
-router.get('/', (req, res) =>{
-    //res.send('Hola mundo desde rutas!')
-    
+router.get('/users', (req, res) =>{
+    //res.send('Hola mundo desde rutas!')    
      conexion.query('SELECT * FROM users', (error, results) => {
          if(error){
              throw error;
@@ -35,8 +33,9 @@ router.get('/editUser/:id', (req, res) => {
     })
 })
 
-//invocamos al metodo pata el CRUD  de usuarios, llamamo al metodo save
+//invocamos al metodo pata el CRUD  de usuarios, 
 const userController = require('../controllers/userController')
+const authController = require('../controllers/authController')
 
 router.post('/saveUser', userController.saveUser)
 router.post('/updateUser', userController.updateUser)
@@ -49,10 +48,16 @@ router.get('/deleteUser/:id', (req, res) => {
             console.log(error);
             res.status(500).send("Error interno del servidor.");
         } else {
-            res.redirect('/');
+            res.redirect('/users');
         }
     })
 });
+
+router.get('/', (req, res) => {
+    res.render('index')
+})
+
+router.get('/logout', authController.logout)
 
 //tenemos que exportar hacia el app
 module.exports = router

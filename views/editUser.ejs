@@ -4,13 +4,13 @@
   
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <%- include ('template/breadcrumb', {module: 'Edit User'}) %>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-md-12">
-            <% if (user)  { %> 
-              <h1>Edit User</h1>
+            <% if (user)  { %>               
         
               <div class="container">
                 <form action="/updateUser" method="POST">
@@ -33,7 +33,7 @@
                     </div>
                     
                     <button type="submit" class="btn btn-primary" tabindex="4">Enviar</button>
-                    <a href="/" class="btn btn-secondary">Cancel</a>
+                    <a href="/users" class="btn btn-secondary">Cancel</a>
                   </form>            
                   
               </div>
