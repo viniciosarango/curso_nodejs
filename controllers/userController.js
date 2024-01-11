@@ -2,7 +2,7 @@
 const conexion = require('../database/db')
 
 //procedure to "save"
-exports.save = (req, res) => {
+exports.saveUser = (req, res) => {
     const email = req.body.email
     const name = req.body.name
     const rol = req.body.rol
@@ -18,7 +18,7 @@ exports.save = (req, res) => {
 }
 
 //procedure to "edit"
-exports.update = (req, res) => {
+exports.updateUser = (req, res) => {
     const id = req.body.id
     const email = req.body.email
     const name = req.body.name

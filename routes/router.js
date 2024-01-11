@@ -15,37 +15,34 @@ router.get('/', (req, res) =>{
              throw error;
          } else {
              //res.send(results);
-             res.render('index', {results: results}) // pasamos los resultadoa como una variable
+             res.render('users', {results: results}) // pasamos los resultadoa como una variable
          }
      })
 })
 
-router.get('/create', (req, res) =>{
-    res.render('create')
+router.get('/createUser', (req, res) =>{
+    res.render('createUser')
 })
 
-router.get('/edit/:id', (req, res) => {
+router.get('/editUser/:id', (req, res) => {
     const id = req.params.id;
     conexion.query('SELECT * FROM users WHERE id= ?', [id], (error, results) => {
         if(error){
             throw error;
         } else {            
-            res.render('edit', {user: results[0] }) 
+            res.render('editUser', {user: results[0] }) 
         }
     })
 })
 
-
-
-
 //invocamos al metodo pata el CRUD  de usuarios, llamamo al metodo save
 const userController = require('../controllers/userController')
 
-router.post('/save', userController.save)
-router.post('/update', userController.update)
+router.post('/saveUser', userController.saveUser)
+router.post('/updateUser', userController.updateUser)
 
 //el delete lo hacemos directamente aqui
-router.get('/delete/:id', (req, res) => {
+router.get('/deleteUser/:id', (req, res) => {
     const id = req.params.id
     conexion.query('DELETE FROM users WHERE id= ?', [id], (error, results) => {
         if (error) {
