@@ -57,7 +57,17 @@ router.get('/', (req, res) => {
     res.render('index')
 })
 
+
 router.get('/logout', authController.logout)
+
+router.get('/login', (req, res) => {
+    res.render('login')
+})
+
+router.get('/register', (req, res) => {
+    res.render('register')
+})
+
 
 //tenemos que exportar hacia el app
 module.exports = router
