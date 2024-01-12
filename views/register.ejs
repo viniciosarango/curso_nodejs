@@ -15,20 +15,26 @@
     <link href="css/signin.css" rel="stylesheet">
   </head>
   <body class="text-center">
+
+    <% if(alert) { %> 
+        <div class="alert alert-danger" role="alert">
+            <%= alertMessage %>
+        </div>   
+    <% } %>
     
     <main class="form-signin text-center shadow-lg p-3 mb-5">
       <form action="/register" method="POST">        
         <img class="mb-4" src="img/logo.png" alt="logo" width="50%" height="50%">
         <div class="form-floating">
-          <input type="text" class="form-control" id="name" name="name" placeholder="Name" autofocus>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name" autofocus required>
           <label for="name">Name</label>
         </div>
         <div class="form-floating">
-          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
           <label for="email">Email</label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+          <input type="password" class="form-control" id="pass" name="pass" placeholder="Password" required>
           <label for="pass">Password</label>
         </div>
         <div  class="mb-3">          

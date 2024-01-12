@@ -10,8 +10,10 @@ exports.register = async (req, res) => {
         const name = req.body.name
         const email = req.body.email
         const pass = req.body.pass
+        
         let passHash = await bcryptjs.hash(pass, 10)
         //console.log(name + '-' + email + '-' + passHash)
+        
         //conexion con la bd para enviarle los datos
         conexion.query('INSERT INTO users SET ?', {
             name: name,
@@ -20,8 +22,14 @@ exports.register = async (req, res) => {
         }, (error, results) => {
             if(error){
                 console.error(error)
-            }
-            res.redirect('/')
+                res.render('register', {
+                    //creamos dos variables
+                    alert: true,
+                    alertMessage: 'Este email ya esta registrado'
+                })
+            } else {
+                res.redirect('/')
+            }            
         })    
     } catch (error) {
         console.error(error)
