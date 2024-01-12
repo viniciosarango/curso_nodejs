@@ -29,7 +29,7 @@ exports.updateUser = (req, res) => {
             console.log(error);
             res.status(500).send("Error interno del servidor.");
         } else {
-            res.redirect('/');
+            res.redirect('/users');
         }
     });        
 }

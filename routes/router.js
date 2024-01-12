@@ -68,6 +68,7 @@ router.get('/register', (req, res) => {
     res.render('register')
 })
 
+router.post('/register', authController.register)
 
 //tenemos que exportar hacia el app
 module.exports = router

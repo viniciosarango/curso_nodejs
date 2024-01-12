@@ -1,1 +1,46 @@
-<h1>registrer</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Vinicio Sarango">
+    <meta name="generator" content="Sensei 1.0.0">
+    <title>Sistema Register</title> 
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    
+    <main class="form-signin text-center shadow-lg p-3 mb-5">
+      <form action="/register" method="POST">        
+        <img class="mb-4" src="img/logo.png" alt="logo" width="50%" height="50%">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name" autofocus>
+          <label for="name">Name</label>
+        </div>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+          <label for="email">Email</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+          <label for="pass">Password</label>
+        </div>
+        <div  class="mb-3">          
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Save</button>   
+        </div>
+        <div>          
+          <a href="/" type="button" class="w-100 btn btn-lg btn-bd-primary">Cancel</a> 
+        </div>
+      </form>
+    </main>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+  </body>
+</html>
