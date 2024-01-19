@@ -61,7 +61,7 @@ router.get('/', (req, res) => {
 router.get('/logout', authController.logout)
 
 router.get('/login', (req, res) => {
-    res.render('login')
+    res.render('login', {alert:false})
 })
 
 router.get('/register', (req, res) => {
@@ -69,6 +69,8 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', authController.register)
+router.post('/login', authController.login)
+
 
 //tenemos que exportar hacia el app
 module.exports = router
