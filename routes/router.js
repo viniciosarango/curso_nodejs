@@ -10,29 +10,42 @@ const authController = require('../controllers/authController')
 const conexion = require ('../database/db')
 
 //creacion de ruta inicial
-router.get('/users', (req, res) =>{
+router.get('/users', authController.isAuthenticated, (req, res) =>{
     //res.send('Hola mundo desde rutas!')    
      conexion.query('SELECT * FROM users', (error, results) => {
          if(error){
              throw error;
          } else {
              //res.send(results);
-             res.render('users', {results: results, titleWeb: "List users"}) // pasamos los resultadoa como una variable
+            if(row.rol == "Admin"){
+                res.render('users', {results: results, titleWeb: "List users"}) 
+            } else {
+                res.render('index', {userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+            }
          }
      })
 })
 
-router.get('/createUser', (req, res) =>{
-    res.render('createUser', { titleWeb: "Create user" })
+router.get('/createUser', authController.isAuthenticated, (req, res) =>{
+    if(row.rol == "Admin"){
+        res.render('createUser', { titleWeb: "Create user" })
+    } else {
+        res.render('index', {userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+    }
+    
 })
 
-router.get('/editUser/:id', (req, res) => {
+router.get('/editUser/:id', authController.isAuthenticated, (req, res) => {
     const id = req.params.id;
     conexion.query('SELECT * FROM users WHERE id= ?', [id], (error, results) => {
         if(error){
             throw error;
-        } else {            
-            res.render('editUser', {user: results[0], titleWeb: "Edit user" }) 
+        } else {
+            if(row.rol == "Admin") {
+                res.render('editUser', {user: results[0], titleWeb: "Edit user" }) 
+            }else {
+                res.render('index', {userName: row.name, image: row.image, titleWeb: "Control Dashboard"})
+            }                        
         }
     })
 })
