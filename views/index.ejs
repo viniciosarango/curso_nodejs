@@ -1,6 +1,6 @@
 <%- include ("template/header") %>
 <%- include ("template/navbar") %>
-<%- include ("template/aside") %>  
+<%- include ("template/aside"), { userName: userName, image: image } %>  
   
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -12,7 +12,7 @@
           <div class="col-md-12">                        
             <div class="card">
                 <div class="card-header">
-                  Bienvenidos
+                  Bienvenido <%= userName %>
                 </div>
                 <div class="card-body">
                   <h5 class="card-title">Clientes</h5>

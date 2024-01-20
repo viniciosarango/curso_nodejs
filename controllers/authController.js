@@ -126,7 +126,7 @@ exports.isAuthenticated = async (req, res, next)=>{
             conexion.query('SELECT * FROM users WHERE id = ?', [decodificada.id], (error, results)=>{
                 if(!results){return next()}
 
-                req.name = results[0]
+                row = results[0]
                 return next()
             })
         } catch (error) {
