@@ -11,7 +11,7 @@ app.set('view engine', 'ejs')
 
 //se usa para formularios, si no lo ponemos nos da el error:TypeError: Cannot read properties of undefined 
 app.use(express.urlencoded({extended:false}))
-//app.use(cookieParser)
+app.use(cookieParser())
 
 
 // importar el router

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcryptjs = require('bcryptjs')
 const conexion = require('../database/db')
-const {promosify} = require('util')
+const {promisify} = require('util')
 const nodemailer = require('nodemailer')
 
 //procedure para register
@@ -61,11 +61,6 @@ exports.register = async (req, res) => {
     }
 }
 
-//procedure oara logout
-exports.logout = (req, res) => {
-    return res.redirect('/')
-}
-
 
 //procedure to login
 exports.login = async (req, res)=>{
@@ -120,4 +115,31 @@ exports.login = async (req, res)=>{
     } catch (error) {
         console.log(error)
     }
+}
+
+
+//procedure to authenticate
+exports.isAuthenticated = async (req, res, next)=>{
+    if (req.cookies.jwt) {
+        try {
+            const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
+            conexion.query('SELECT * FROM users WHERE id = ?', [decodificada.id], (error, results)=>{
+                if(!results){return next()}
+
+                req.name = results[0]
+                return next()
+            })
+        } catch (error) {
+            console.log(error)
+            return next()
+        }
+    }else{
+        res.redirect('/login')        
+    }
+} 
+
+//procedure para logout
+exports.logout = (req, res) => {
+    res.clearCookie('jwt')
+    return res.redirect('/login')
 }

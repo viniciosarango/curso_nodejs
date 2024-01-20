@@ -1,6 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
+//invocamos al metodo pata el CRUD  de usuarios, 
+const userController = require('../controllers/userController')
+const authController = require('../controllers/authController')
+
 //invocar a la conexion de la bdd
 
 const conexion = require ('../database/db')
@@ -33,13 +37,6 @@ router.get('/editUser/:id', (req, res) => {
     })
 })
 
-//invocamos al metodo pata el CRUD  de usuarios, 
-const userController = require('../controllers/userController')
-const authController = require('../controllers/authController')
-
-router.post('/saveUser', userController.saveUser)
-router.post('/updateUser', userController.updateUser)
-
 //el delete lo hacemos directamente aqui
 router.get('/deleteUser/:id', (req, res) => {
     const id = req.params.id
@@ -53,7 +50,12 @@ router.get('/deleteUser/:id', (req, res) => {
     })
 });
 
-router.get('/', (req, res) => {
+router.post('/saveUser', userController.saveUser)
+router.post('/updateUser', userController.updateUser)
+
+
+//router for views
+router.get('/', authController.isAuthenticated, (req, res) => {
     res.render('index')
 })
 
